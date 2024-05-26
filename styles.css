@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #faf8ef;
+}
+
+.game-container {
+    text-align: center;
+}
+
+.game-board {
+    width: 400px;
+    height: 400px;
+    background-color: #bbada0;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.tile {
+    width: 90px;
+    height: 90px;
+    background-color: #eee4da;
+    position: absolute;
+    transition: all 0.2s ease;
+    font-size: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
