@@ -13,7 +13,8 @@ function start_game(n) {
         coords[3] = Math.floor(Math.random()*n);
     };
     board[coords[0]][coords[2]] = 2;
-    board[coords[1]][coords[3]] = 2;    
+    board[coords[1]][coords[3]] = 2;  
+    draw_board(board,n);  
     return board;
 };
 
@@ -34,8 +35,20 @@ function draw_board(board, n) {
     };
 };
 
+// move tiles
+function move(board, action) {
+    console.log(action)
+}
+
 let n = 4;
 let board = start_game(n);
-draw_board(board,n);
 
+// event handler for moving tiles
+document.addEventListener('keyup', (e) => {
+    console.log(e.code);
 
+    if (e.code === "ArrowUp" || e.code === "KeyW") move(board, "w");
+    else if (e.code === "ArrowDown" || e.code === "KeyS") move(board, "s");
+    else if (e.code === "ArrowLeft" || e.code === "KeyA") move(board, "a");
+    else if (e.code === "ArrowRight" || e.code === "KeyD") move(board, "d");
+});
