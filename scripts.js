@@ -1,6 +1,9 @@
 // set initial board status
 function start_game(n) {
+    score = 0;
     let board = [];
+    document.getElementById("game-board").style.width = `${n*100}px`
+    document.getElementById("game-board").style.height = `${n*100}px`
     for (let i = 0; i < n; i++) {
         board.push(new Array(n).fill(0));
     };
@@ -37,17 +40,15 @@ function move(board, n, action) {
     // console.log(action);
     switch (action) {
         case "w":
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < n; j++) {
-
-                };
-            };
             break;
         case "s":
+            
             break;
         case "a":
+          
             break;
         case "d":
+        
             break;
     }
 
@@ -56,6 +57,7 @@ function move(board, n, action) {
     return board;
 };
 
+// place tile on empty spots on grid
 function place_tile(board, n) {
     let empty = [];
     for (let i = 0; i < n; i++) {
@@ -67,27 +69,28 @@ function place_tile(board, n) {
     };
 
     if (empty.length == 0) {
-        console.log("game ended!");
-        return board;
+        console.log("game ended!"); // change this
+    } else {
+        const coords = empty[Math.floor(Math.random()*empty.length)];
+        board[coords[0]][coords[1]] = 2;
     };
-
-    const coords = empty[Math.floor(Math.random()*empty.length)];
-    board[coords[0]][coords[1]] = 2;
     return board;
 };
 
-let n = 4; 
-let board = start_game(n);
-
-// event handler for moving tiles
-document.addEventListener('keyup', (e) => {
+// detect key press
+function control(e) {
     if (e.code === "ArrowUp" || e.code === "KeyW") board = move(board, n, "w");
     else if (e.code === "ArrowDown" || e.code === "KeyS") board = move(board, n, "s");
     else if (e.code === "ArrowLeft" || e.code === "KeyA") board = move(board, n, "a");
     else if (e.code === "ArrowRight" || e.code === "KeyD") board = move(board, n, "d");
-});
+};
+
+let n = 4;
+var score = 0;
+let board = start_game(n);
+
+// event handler for moving tiles
+document.addEventListener('keyup', control);
 
 // event handler for restart button
-document.getElementById("restart-button").addEventListener('click', () => {
-    board = start_game(n);
-});
+document.getElementById("restart-button").addEventListener('click', () => {board = start_game(n);});
