@@ -53,22 +53,7 @@ function move(board, n, action) {
 
     board = place_tile(board, n);
     draw_board(board, n);
-    if (board_filled(board, n)) {
-        console.log("game ended!");
-    };
     return board;
-};
-
-// detects if board completely filled a.k.a. terminating condition
-function board_filled(board, n) {
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < n; j++) {
-            if (board[i][j] == 0) {
-                return false;
-            };
-        };
-    };
-    return true;
 };
 
 function place_tile(board, n) {
@@ -79,6 +64,11 @@ function place_tile(board, n) {
                 empty.push([i,j]);
             };
         };
+    };
+
+    if (empty.length == 0) {
+        console.log("game ended!");
+        return board;
     };
 
     const coords = empty[Math.floor(Math.random()*empty.length)];
