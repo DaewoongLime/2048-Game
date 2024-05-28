@@ -140,6 +140,7 @@ function move(board, n, action) {
             };
             break;
     }
+    document.getElementById("score").innerHTML = score;
     board = place_tile(board, n);
     draw_board(board, n);
     return board;

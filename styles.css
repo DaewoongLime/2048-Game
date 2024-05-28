@@ -7,6 +7,12 @@ body {
     background-color: #faf8ef;
 }
 
+#score-container {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
 .game-container {
     text-align: center;
 }
