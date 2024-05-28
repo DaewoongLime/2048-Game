@@ -40,18 +40,106 @@ function move(board, n, action) {
     // console.log(action);
     switch (action) {
         case "w":
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (board[j][i] == 0) {
+                        for (let k = j+1; k < n; k++) {
+                            if (board[k][i] != 0) {
+                                board[j][i] = board[k][i];
+                                board[k][i] = 0;
+                                break;
+                            };
+                        };
+                    };
+                    for (let k = j+1; k < n; k++) {
+                        if (board[k][i] != 0) {
+                            if (board[k][i] == board[j][i]) {
+                                board[j][i] += board[k][i];
+                                board[k][i] = 0;   
+                                score += board[j][i];
+                            };
+                            break;
+                        };
+                    };
+                };
+            };
             break;
         case "s":
-            
+            for (let i = 0; i < n; i++) {
+                for (let j = n-1; j >= 0; j--) {
+                    if (board[j][i] == 0) {
+                        for (let k = j-1; k >= 0; k--) {
+                            if (board[k][i] != 0) {
+                                board[j][i] = board[k][i];
+                                board[k][i] = 0;
+                                break;
+                            };
+                        };
+                    };
+                    for (let k = j-1; k >= 0; k--) {
+                        if (board[k][i] != 0) {
+                            if (board[k][i] == board[j][i]) {
+                                board[j][i] += board[k][i];
+                                board[k][i] = 0;
+                                score += board[j][i];
+                            };
+                            break;
+                        };
+                    };
+                };
+            };
             break;
         case "a":
-          
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < n; j++) {
+                    if (board[i][j] == 0) {
+                        for (let k = j+1; k < n; k++) {
+                            if (board[i][k] != 0) {
+                                board[i][j] = board[i][k];
+                                board[i][k] = 0;
+                                break;
+                            };
+                        };
+                    };
+                    for (let k = j+1; k < n; k++) {
+                        if (board[i][k] != 0) { 
+                            if (board[i][k] == board[i][j]) {
+                                board[i][j] += board[i][k];
+                                board[i][k] = 0;
+                                score += board[i][j];
+                            };
+                            break;
+                        };
+                    };
+                };
+            };
             break;
         case "d":
-        
+            for (let i = 0; i < n; i++) {
+                for (let j = n-1; j >= 0; j--) {
+                    if (board[i][j] == 0) {
+                        for (let k = j-1; k >= 0; k--) {
+                            if (board[i][k] != 0) {
+                                board[i][j] = board[i][k];
+                                board[i][k] = 0;
+                                break;
+                            };
+                        };
+                    };
+                    for (let k = j-1; k >= 0; k--) {
+                        if (board[i][k] != 0) { 
+                            if (board[i][k] == board[i][j]) {
+                                board[i][j] += board[i][k];
+                                board[i][k] = 0;
+                                score += board[i][j];
+                            };
+                            break;
+                        };
+                    };
+                };
+            };
             break;
     }
-
     board = place_tile(board, n);
     draw_board(board, n);
     return board;
