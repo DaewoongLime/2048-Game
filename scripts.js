@@ -20,13 +20,31 @@ function draw_board(board, n) {
         b.removeChild(b.firstChild);
     };
 
+    const tileColors = {
+        2: '#eee4da',
+        4: '#ede0c8',
+        8: '#f2b179',
+        16: '#f59563',
+        32: '#f67c5f',
+        64: '#f65e3b',
+        128: '#edcf72',
+        256: '#edcc61',
+        512: '#edc850',
+        1024: '#edc53f',
+        2048: '#edc22e',
+        4096: '#edb914',
+        8192: '#edaa00',
+        16384: '#e89c00',
+        default: '#000000'
+    };
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if (board[i][j] != 0) {
                 var tile = document.createElement('div');
                 tile.setAttribute('class', 'tile');
-                tile.style.top = `${100 * i + 5}px`
-                tile.style.left = `${100 * j + 5}px`
+                tile.style.backgroundColor = tileColors[board[i][j]];
+                tile.style.top = `${100 * i + 5}px`;
+                tile.style.left = `${100 * j + 5}px`;
                 tile.innerHTML = board[i][j];
                 b.appendChild(tile);
                 // console.log(i,j);
@@ -155,7 +173,7 @@ function move(board, n, action) {
         board = place_tile(board, n);
         draw_board(board, n);
     };
-    
+
     return board;
 };
 
