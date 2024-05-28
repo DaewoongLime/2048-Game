@@ -23,6 +23,7 @@ body {
     background-color: #bbada0;
     position: relative;
     margin-bottom: 20px;
+    border-radius: 10px;
 }
 
 .tile {
@@ -32,8 +33,30 @@ body {
     position: absolute;
     transition: all 0.2s ease;
     font-size: 2em;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+}
+
+#restart-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid #4CAF50; /* Green border */
+  color: #ffffff; /* White text */
+  background-color: #4CAF50; /* Green background */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+}
+
+/* Hover effect */
+#restart-button:hover {
+  background-color: #45a049; /* Darker green */
+  border-color: #45a049; /* Darker green */
 }
