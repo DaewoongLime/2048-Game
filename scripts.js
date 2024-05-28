@@ -224,12 +224,12 @@ function checkDirection(x1, x2, y1, y2) {
     let x = x2 - x1;
     let y = y2 - y1;
     if (y > x) {
-        if (y > 0) {board = move(board, n, "w")}
-        else {board = move(board, n, "s")};
+        if (y > 0) {board = move(board, n, "s")}
+        else {board = move(board, n, "w")};
     } else {
         if (x > 0) {board = move(board, n, "d")}
         else {board = move(board, n, "a")};
-    }
+    };
     return board;
 };
 
