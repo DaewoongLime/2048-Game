@@ -7,9 +7,10 @@ function start_game(n) {
     for (let i = 0; i < n; i++) {
         board.push(new Array(n).fill(0));
     };
-    board = place_tile(board, n);
-    board = place_tile(board, n);
-    draw_board(board, n);  
+    board = place_tile(board, n, true);
+    board = place_tile(board, n, true);
+    board = [['2','4','8','16'],[32,64,128,256],[512,1024,1024,4096],[2,2,2,2]]
+    draw_board(board, n);
     return board;
 };
 
@@ -168,31 +169,45 @@ function move(board, n, action) {
             break;
     }
 
+    board = place_tile(board, n, moved);
     if (moved) {
         document.getElementById("score").innerHTML = score;
-        board = place_tile(board, n);
         draw_board(board, n);
+        if (gameWon == 1) {
+            alert("Congratulations! You've won the game");
+            gameWon = -1;
+        };
     };
 
     return board;
 };
 
 // place tile on empty spots on grid
-function place_tile(board, n) {
+function place_tile(board, n, moved) {
     let empty = [];
+    let gameOver = true;
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < n; j++) {
             if (board[i][j] == 0) {
                 empty.push([i,j]);
             };
+            if (i > 0 && board[i][j] == board[i-1][j] ||
+                i < n-1 && board[i][j] == board[i+1][j] ||
+                j > 0 && board[i][j] == board[i][j-1] ||
+                i < n-1 && board[i][j] == board[i][j+1]
+            ) {
+                gameOver = false;
+            };
+            if (gameWon == 0 && board[i][j] == 2048) {gameWon = 1;};
         };
     };
-
-    if (empty.length == 0) {
-        console.log("game ended!"); // change this
-    } else {
+    if (moved) {
         const coords = empty[Math.floor(Math.random()*empty.length)];
-        board[coords[0]][coords[1]] = 2;
+        board[coords[0]][coords[1]] = [2,2,2,2,4][Math.floor(Math.random()*5)]; // generate 4-tile by 20%
+    } else {
+        if (empty.length == 0 && gameOver) {
+            alert("Game Over. GG.");
+        };
     };
     return board;
 };
@@ -207,10 +222,7 @@ function control(e) {
 
 let n = 4;
 var score = 0;
+var gameWon = 0;
 let board = start_game(n);
-
-// event handler for moving tiles
-document.addEventListener('keyup', control);
-
-// event handler for restart button
-document.getElementById("restart-button").addEventListener('click', () => {board = start_game(n);});
+document.addEventListener('keyup', control); // event handler for moving tiles
+document.getElementById("restart-button").addEventListener('click', () => {board = start_game(n);}); // event handler for restart button
