@@ -219,9 +219,35 @@ function control(e) {
     else if (e.code === "ArrowRight" || e.code === "KeyD") board = move(board, n, "d");
 };
 
+// touch controls
+function checkDirection(x1, x2, y1, y2) {
+    let x = x2 - x1;
+    let y = y2 - y1;
+    if (y > x) {
+        if (y > 0) {board = move(board, n, "w")}
+        else {board = move(board, n, "s")};
+    } else {
+        if (x > 0) {board = move(board, n, "d")}
+        else {board = move(board, n, "a")};
+    }
+    return board;
+};
+
 let n = 4;
 var score = 0;
 var gameWon = 0;
 let board = start_game(n);
 document.addEventListener('keyup', control); // event handler for moving tiles
 document.getElementById("restart-button").addEventListener('click', () => {board = start_game(n);}); // event handler for restart button
+
+let x1 = x2 = y1 = y2 = 0;
+document.addEventListener('touchstart', e => {
+    x1 = e.changedTouches[0].screenX;
+    y1 = e.changedTouches[0].screenY;
+});
+
+document.addEventListener('touchend', e => {
+    x2 = e.changedTouches[0].screenX;
+    y2 = e.changedTouches[0].screenY;
+    checkDirection(x1, x2, y1, y2);
+});
