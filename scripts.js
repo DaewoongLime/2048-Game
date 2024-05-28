@@ -239,6 +239,7 @@ let n = 4;
 var score = 0;
 var gameWon = 0;
 let board = start_game(n);
+console.log('hi')
 document.addEventListener('keyup', control); // event handler for moving tiles
 document.getElementById("restart-button").addEventListener('click', () => {board = start_game(n);}); // event handler for restart button
 
