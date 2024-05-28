@@ -38,6 +38,7 @@ function draw_board(board, n) {
 // move tiles
 function move(board, n, action) {
     // console.log(action);
+    let moved = false;
     switch (action) {
         case "w":
             for (let i = 0; i < n; i++) {
@@ -47,6 +48,7 @@ function move(board, n, action) {
                             if (board[k][i] != 0) {
                                 board[j][i] = board[k][i];
                                 board[k][i] = 0;
+                                moved = true;
                                 break;
                             };
                         };
@@ -57,6 +59,7 @@ function move(board, n, action) {
                                 board[j][i] += board[k][i];
                                 board[k][i] = 0;   
                                 score += board[j][i];
+                                moved = true;
                             };
                             break;
                         };
@@ -72,6 +75,7 @@ function move(board, n, action) {
                             if (board[k][i] != 0) {
                                 board[j][i] = board[k][i];
                                 board[k][i] = 0;
+                                moved = true;
                                 break;
                             };
                         };
@@ -82,6 +86,7 @@ function move(board, n, action) {
                                 board[j][i] += board[k][i];
                                 board[k][i] = 0;
                                 score += board[j][i];
+                                moved = true;
                             };
                             break;
                         };
@@ -97,6 +102,7 @@ function move(board, n, action) {
                             if (board[i][k] != 0) {
                                 board[i][j] = board[i][k];
                                 board[i][k] = 0;
+                                moved = true;
                                 break;
                             };
                         };
@@ -107,6 +113,7 @@ function move(board, n, action) {
                                 board[i][j] += board[i][k];
                                 board[i][k] = 0;
                                 score += board[i][j];
+                                moved = true;
                             };
                             break;
                         };
@@ -122,6 +129,7 @@ function move(board, n, action) {
                             if (board[i][k] != 0) {
                                 board[i][j] = board[i][k];
                                 board[i][k] = 0;
+                                moved = true;
                                 break;
                             };
                         };
@@ -132,6 +140,7 @@ function move(board, n, action) {
                                 board[i][j] += board[i][k];
                                 board[i][k] = 0;
                                 score += board[i][j];
+                                moved = true;
                             };
                             break;
                         };
@@ -140,9 +149,13 @@ function move(board, n, action) {
             };
             break;
     }
-    document.getElementById("score").innerHTML = score;
-    board = place_tile(board, n);
-    draw_board(board, n);
+
+    if (moved) {
+        document.getElementById("score").innerHTML = score;
+        board = place_tile(board, n);
+        draw_board(board, n);
+    };
+    
     return board;
 };
 
